@@ -6,7 +6,8 @@ import textwrap # For automatically adding linebreaks to long texts.
 import pandas as pd # For constructing and visualizing tables.
 
 # Custom functions for providing feedback on your solutions.
-from ai_foundations.feedback.course_1 import ngrams
+#from ai_foundations.feedback.course_1 import ngrams
+
 
 africa_galore = pd.read_json(
     "https://storage.googleapis.com/dm-educational/assets/ai_foundations/africa_galore.json"
