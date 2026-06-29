@@ -54,3 +54,29 @@ for bigram, count in bigram_counter.most_common(10):
 print("\n\nMost common trigrams:")
 for trigram, count in trigram_counter.most_common(10):
     print(f"  ({trigram}, {count})")
+
+""" def get_ngram_counts(dataset: list[str], n: int) -> dict[str, Counter]:
+    ngram_count = defaultdict(Counter)
+    for parag """
+    
+from collections import defaultdict, Counter
+
+# Initialize the nested counter
+sales_tracker = defaultdict(Counter)
+
+# Record some sales data: (item_type, size)
+sales_data = [
+    ('shirt', 'M'),
+    ('shirt', 'M'),
+    ('shirt', 'L'),
+    ('pants', 'S'),
+    ('pants', 'M'),
+    ('shirt', 'L')
+]
+
+# Populate the tracker without checking if keys exist
+for item, size in sales_data:
+    sales_tracker[item][size] += 1
+
+# Output the results
+print(sales_tracker)
