@@ -25,6 +25,10 @@ def tokenizer (text : str):
 
 print(tokenizer(dataset[0]))
 
+all_unigrams = []
+all_bigrams = []
+all_trigrams = []
+
 def ngram_generator(text: str, n: int):
     token = tokenizer(text)
     ngram = []
@@ -33,5 +37,11 @@ def ngram_generator(text: str, n: int):
         ngram.append(tuple(token[i:i+n]))
     
     return ngram
+for paragraph in dataset:
+    all_unigrams.extend(ngram_generator(paragraph, 1))
+    all_bigrams.extend(ngram_generator(paragraph,2))
+    all_trigrams.extend(ngram_generator(paragraph, 3))
 
-print(ngram_generator(dataset[0],2))
+print(all_unigrams[:4])
+print(all_bigrams[:4])
+print(all_trigrams[:4])
