@@ -14,3 +14,24 @@ africa_galore = pd.read_json(
 )
 dataset = africa_galore["description"]
 print(f"The dataset consists of {dataset.shape[0]} paragraphs.")
+
+for paragraph in dataset[:10]:
+    formatted_paragraph = textwrap.fill(paragraph)
+    print(f"{formatted_paragraph}\n")
+
+def tokenizer (text : str):
+    tokenized = text.split(' ')
+    return tokenized
+
+print(tokenizer(dataset[0]))
+
+def ngram_generator(text: str, n: int):
+    token = tokenizer(text)
+    ngram = []
+    for i in range(len(token)-n+1):
+        
+        ngram.append(tuple(token[i:i+n]))
+    
+    return ngram
+
+print(ngram_generator(dataset[0],2))
