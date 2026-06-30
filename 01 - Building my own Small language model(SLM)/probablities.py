@@ -9,74 +9,82 @@ import pandas as pd # For constructing and visualizing tables.
 #from ai_foundations.feedback.course_1 import ngrams
 
 
-africa_galore = pd.read_json(
-    "https://storage.googleapis.com/dm-educational/assets/ai_foundations/africa_galore.json"
-)
-dataset = africa_galore["description"]
-print(f"The dataset consists of {dataset.shape[0]} paragraphs.")
+# africa_galore = pd.read_json(
+#     "https://storage.googleapis.com/dm-educational/assets/ai_foundations/africa_galore.json"
+# )
+# dataset = africa_galore["description"]
+# print(f"The dataset consists of {dataset.shape[0]} paragraphs.")
 
-""" for paragraph in dataset[:10]:
-    formatted_paragraph = textwrap.fill(paragraph)
-    print(f"{formatted_paragraph}\n") """
+# for paragraph in dataset[:10]:
+#     formatted_paragraph = textwrap.fill(paragraph)
+#     print(f"{formatted_paragraph}\n") 
 
-def tokenizer (text : str):
-    tokenized = text.split(' ')
-    return tokenized
+# def tokenizer (text : str):
+#     tokenized = text.split(' ')
+#     return tokenized
 
-print(tokenizer(dataset[0]))
+# print(tokenizer(dataset[0]))
 
-all_unigrams = []
-all_bigrams = []
-all_trigrams = []
+# all_unigrams = []
+# all_bigrams = []
+# all_trigrams = []
 
-def ngram_generator(text: str, n: int):
-    token = tokenizer(text)
-    ngram = []
-    for i in range(len(token)-n+1):
+# def ngram_generator(text: str, n: int):
+#     token = tokenizer(text)
+#     ngram = []
+#     for i in range(len(token)-n+1):
         
-        ngram.append(tuple(token[i:i+n]))
+#         ngram.append(tuple(token[i:i+n]))
     
-    return ngram
-for paragraph in dataset:
-    all_unigrams.extend(ngram_generator(paragraph, 1))
-    all_bigrams.extend(ngram_generator(paragraph,2))
-    all_trigrams.extend(ngram_generator(paragraph, 3))
+#     return ngram
+# for paragraph in dataset:
+#     all_unigrams.extend(ngram_generator(paragraph, 1))
+#     all_bigrams.extend(ngram_generator(paragraph,2))
+#     all_trigrams.extend(ngram_generator(paragraph, 3))
 
-print(all_unigrams[:4])
-print(all_bigrams[:4])
-print(all_trigrams[:4])
+# print(all_unigrams[:4])
+# print(all_bigrams[:4])
+# print(all_trigrams[:4])
 
-bigram_counter = Counter(all_bigrams)
-trigram_counter = Counter(all_trigrams)
-for bigram, count in bigram_counter.most_common(10):
-    print(f"  ({bigram}, {count})")
+# bigram_counter = Counter(all_bigrams)
+# trigram_counter = Counter(all_trigrams)
+# for bigram, count in bigram_counter.most_common(10):
+#     print(f"  ({bigram}, {count})")
 
-print("\n\nMost common trigrams:")
-for trigram, count in trigram_counter.most_common(10):
-    print(f"  ({trigram}, {count})")
+# print("\n\nMost common trigrams:")
+# for trigram, count in trigram_counter.most_common(10):
+#     print(f"  ({trigram}, {count})") 
 
-""" def get_ngram_counts(dataset: list[str], n: int) -> dict[str, Counter]:
-    ngram_count = defaultdict(Counter)
-    for parag """
+# def get_ngram_counts(dataset: list[str], n: int) -> dict[str, Counter]:
+#     ngram_count = defaultdict(Counter)
     
-from collections import defaultdict, Counter
+data = "table mountain is tall"
+def generate_ngram(text : str, n: int ):
+    tokens = text.split(' ')
+    n_ngram = []
+    for i in range(len(tokens)-n+1):
+        n_ngram.append(tuple(tokens[i:i+n]))
+    
+    
+    predict  = defaultdict(Counter)
+    merged = []
+    for ngram in n_ngram :
+        context = " ".join(ngram[:-1])
+        print(context)
+        value = "".join(ngram[-1])
+        print(value)
+        predict[context][value] +=1
 
-# Initialize the nested counter
-sales_tracker = defaultdict(Counter)
+    return predict
 
-# Record some sales data: (item_type, size)
-sales_data = [
-    ('shirt', 'M'),
-    ('shirt', 'M'),
-    ('shirt', 'L'),
-    ('pants', 'S'),
-    ('pants', 'M'),
-    ('shirt', 'L')
-]
 
-# Populate the tracker without checking if keys exist
-for item, size in sales_data:
-    sales_tracker[item][size] += 1
+print(generate_ngram(data, 3))
 
-# Output the results
-print(sales_tracker)
+
+""" 
+{
+  "Table Mountain": Counter({"is": 2}),
+  "Mountain is": Counter({"tall": 1, "beautiful": 1})   
+}
+"""
+
