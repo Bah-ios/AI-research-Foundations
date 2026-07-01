@@ -84,3 +84,18 @@ print(
     f" ({zero_count/bigram_data_frame.size * 100:.2f}%)")
 
 
+trigram_counts = ngram_counter(dataset, n=3)
+
+# Use the pandas library to display the counts in a table.
+trigram_counts_matrix = {
+    context: dict(counts) for context, counts in trigram_counts.items()
+}
+trigram_data_frame = pd.DataFrame.from_dict(
+    trigram_counts_matrix, orient="index").fillna(0)
+
+display(trigram_data_frame)
+
+zero_count = (trigram_data_frame == 0).sum().sum()
+print(
+    f"Number of trigrams with a count of 0: {zero_count:,}"
+    f" ({zero_count/trigram_data_frame.size * 100:.2f}%)")
