@@ -39,24 +39,24 @@ def ngram_generator(text, n: int):
     
     return ngram
 
-# for paragraph in dataset:
-#     all_unigrams.extend(ngram_generator(paragraph, 1))
-#     all_bigrams.extend(ngram_generator(paragraph,2))
-#     all_trigrams.extend(ngram_generator(paragraph, 3))
+for paragraph in dataset:
+    all_unigrams.extend(ngram_generator(paragraph, 1))
+    all_bigrams.extend(ngram_generator(paragraph,2))
+    all_trigrams.extend(ngram_generator(paragraph, 3))
 
-# # print(all_unigrams[:10])
-# print(all_bigrams[:10])
-# print(all_trigrams[:10])
+# print(all_unigrams[:10])
+print(all_bigrams[:10])
+print(all_trigrams[:10])
 
-# bigram_counter = Counter(all_bigrams)
-# trigram_counter = Counter(all_trigrams)
-# print("\n\n Most common bigrams:")
-# for bigram, count in bigram_counter.most_common(10):
-#     print(f"({bigram}, {count})\n")
+bigram_counter = Counter(all_bigrams)
+trigram_counter = Counter(all_trigrams)
+print("\n\n Most common bigrams:")
+for bigram, count in bigram_counter.most_common(10):
+    print(f"({bigram}, {count})\n")
 
-# print("\n\nMost common trigrams:")
-# for trigram, count in trigram_counter.most_common(10):
-#     print(f"({trigram}, {count})\n") 
+print("\n\nMost common trigrams:")
+for trigram, count in trigram_counter.most_common(10):
+    print(f"({trigram}, {count})\n") 
 
 def ngram_counter(dataset , n : int):
     dict = defaultdict(Counter)
